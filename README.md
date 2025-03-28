@@ -55,3 +55,35 @@ INSERT INTO Employee1 (FirstName, MiddleName, LastName, DOB, MobileNumber, Addre
 ('Olivia', NULL, 'Anderson', '1989-03-14', '2233445566', 'Atlanta', 75000.00),
 ('Ethan', 'K', 'Thomas', '1996-12-20', '3344556677', 'Denver', 67000.00);
 
+```
+### **Insert Data For Task 3**
+```sql
+
+CREATE TABLE Designation (
+    Id INT PRIMARY KEY IDENTITY(1,1),
+    Designation VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE Employee2 (
+    Id INT PRIMARY KEY IDENTITY(1,1),
+    FirstName VARCHAR(50) NOT NULL,
+    MiddleName VARCHAR(50) NULL,
+    LastName VARCHAR(50) NOT NULL,
+    DOB DATE NOT NULL,
+    MobileNumber VARCHAR(10) NOT NULL,
+    Address VARCHAR(100) NULL,
+    Salary DECIMAL(10,2) NOT NULL,
+    DesignationId INT NULL,
+    FOREIGN KEY (DesignationId) REFERENCES Designation(Id)
+);
+INSERT INTO Designation (Designation) 
+VALUES ('Software Engineer'), ('Project Manager'), ('HR');
+
+INSERT INTO Employee2 (FirstName, MiddleName, LastName, DOB, MobileNumber, Address, Salary, DesignationId) 
+VALUES 
+('John', 'A', 'Doe', '1990-05-10', '9876543210', '123 Street, NY', 75000, 1),
+('Jane', NULL, 'Smith', '1985-08-15', '9123456789', '456 Road, LA', 90000, 2),
+('Mike', 'B', 'Johnson', '1992-03-22', '9988776655', '789 Avenue, TX', 80000, 1),
+('Sara', NULL, 'Wilson', '1995-07-18', '9776655443', NULL, 70000, 1);
+
+
