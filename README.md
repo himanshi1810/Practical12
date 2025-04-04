@@ -87,3 +87,68 @@ VALUES
 ('Sara', NULL, 'Wilson', '1995-07-18', '9776655443', NULL, 70000, 1);
 
 
+CREATE VIEW vw_EmployeeDetails AS
+SELECT 
+    E.Id AS EmployeeId, E.FirstName, E.MiddleName, E.LastName,
+    D.Designation, E.DOB, E.MobileNumber, E.Address, E.Salary
+FROM Employee2 E
+LEFT JOIN Designation D ON E.DesignationId = D.Id;
+
+CREATE PROCEDURE sp_InsertDesignation
+    @Designation VARCHAR(50)
+AS
+BEGIN
+    INSERT INTO Designation (Designation) VALUES (@Designation);
+END
+
+CREATE PROCEDURE sp_InsertEmployee
+    @FirstName VARCHAR(50),
+    @MiddleName VARCHAR(50),
+    @LastName VARCHAR(50),
+    @DOB DATE,
+    @MobileNumber VARCHAR(10),
+    @Address VARCHAR(100),
+    @Salary DECIMAL(18,2),
+    @DesignationId INT
+AS
+BEGIN
+    INSERT INTO Employee2 (FirstName, MiddleName, LastName, DOB, MobileNumber, Address, Salary, DesignationId)
+    VALUES (@FirstName, @MiddleName, @LastName, @DOB, @MobileNumber, @Address, @Salary, @DesignationId);
+END
+CREATE PROCEDURE sp_GetEmployeesByDesignation
+    @DesignationId INT
+AS
+BEGIN
+    SELECT 
+        E.Id AS EmployeeId,
+        E.FirstName,
+        E.MiddleName,
+        E.LastName,
+        E.DOB,
+        E.MobileNumber,
+        E.Address,
+        E.Salary,
+        D.Designation
+    FROM Employee2 E
+    INNER JOIN Designation D ON E.DesignationId = D.Id
+    WHERE E.DesignationId = @DesignationId;
+END
+CREATE PROCEDURE sp_GetAllEmployees  
+AS  
+BEGIN  
+    SELECT  
+        E.Id,  
+        E.FirstName,  
+        E.MiddleName,  
+        E.LastName,  
+        D.Designation,  
+        E.DOB,  
+        E.MobileNumber,  
+        E.Address,  
+        E.Salary  
+    FROM Employee2 E  
+    INNER JOIN Designation D ON E.DesignationId = D.Id  
+    ORDER BY E.DOB;  
+END;
+
+
