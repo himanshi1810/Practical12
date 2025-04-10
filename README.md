@@ -1,7 +1,23 @@
 ﻿# Practical12
 # Employee Database Setup
 
-This project contains SQL scripts to create and populate two tables: **Employee** and **Employee1**.
+This project contains SQL scripts for managing employee records across three tasks. Each task focuses on different aspects of database design including table creation, data insertion, and implementing relationships using foreign keys.
+
+## Common Prerequisites
+
+```xml
+<connectionStrings>
+	<add name="ConnectionString" connectionString="Data Source=SF-CPU-0226\SQLEXPRESS;Initial Catalog=Practical-12;Integrated Security=True" providerName="System.Data.SqlClient" />
+</connectionStrings>
+```
+
+Change this connection string for all projects according to your configuration.
+
+```sql
+CREATE DATABASE Practical-12
+USE Practical-12
+```
+
 
 ## 📌 Table: Employee
 
